@@ -1,0 +1,56 @@
+stages:
+  - check
+  - test
+#  - build
+#  - deploy
+
+check:
+    stage: check
+    tags:
+        - on-prem
+    variables:
+        GIT_SUBMODULE_STRATEGY: recursive
+    script:
+        - mw -using $CURRENT_MATLAB_RELEASE matlab -batch "openProject(pwd); buildtool check;"
+    cache:
+        paths:
+            - /*.slxc
+
+test:
+    stage: test
+    tags:
+        - on-prem
+    variables:
+        GIT_SUBMODULE_STRATEGY: recursive
+    script:
+        - mw -using $CURRENT_MATLAB_RELEASE matlab -batch "openProject(pwd); buildtool test;"
+    cache:
+        paths:
+            - /*.slxc
+#build:
+#    stage: build
+#    tags:
+#        - on-prem
+#    variables:
+#        GIT_SUBMODULE_STRATEGY: recursive
+#    rules:
+#        - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+#    script:
+#        - mw -using $CURRENT_MATLAB_RELEASE matlab -batch "openProject(pwd); buildtool build"
+#    cache:
+#        paths:
+#            - /*.slxc
+#
+#deploy:
+#    stage: deploy
+#    tags:
+#        - on-prem
+#    variables:
+#        GIT_SUBMODULE_STRATEGY: recursive
+#    rules:
+#        - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+#    script:
+#        - mw -using $CURRENT_MATLAB_RELEASE matlab -batch "openProject(pwd); buildtool deploy('$INSIDE_LABS_WEB_APP_SERVER_FOLDER_LOCATION','$INSIDE_LABS_PRODUCTION_SERVER_FOLDER_LOCATION')"
+#    cache:
+#        paths:
+#            - /*.slxc
