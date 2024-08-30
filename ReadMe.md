@@ -4,8 +4,9 @@ A digital twin of a current hardware asset should:
 - Model the machine’s dynamics
 - Automatically update parameters of a model when new data from the physical asset becomes available
 
-First principle model of physical assets can be first developed in Simulink and Simscape,
-In order to reflect the up-to-date state of the asset in operation, parameters need to be tuned.
+Physical assets can be modelled in Simulink and Simscape,
+but in order to reflect the up-to-date state of the asset in operation, 
+parameters need to be tuned regularly with collected sensor data.
 **Simulink Design Optimization™** helps you develop parameter tuning algorithms 
 for a digital twin to match the current asset condition.
 You can interactively preprocess test data, automatically estimate model parameters and states, 
